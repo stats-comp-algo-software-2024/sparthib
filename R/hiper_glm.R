@@ -5,3 +5,9 @@ hiper_glm <- function (outcome, design) {
   class(hglm) <- "hglm"
   return(hglm)
 }
+
+
+## ITERATIVELY WEIGHTED LEAST SQUARES
+# stats::optim
+# method = BFGS
+# usethis::use_testthat()
