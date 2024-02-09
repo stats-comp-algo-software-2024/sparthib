@@ -5,7 +5,7 @@ predict.hglm <- function (hglm) {
 
 #' @export
 coef.hglm <- function (hglm) {
-  warning("Yet to be implemented")
+  return(hglm$coefficients)
 }
 
 #' @export
