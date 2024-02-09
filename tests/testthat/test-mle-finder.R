@@ -4,7 +4,15 @@ test_that("linalg and optim least-sq coincide", {
   design <- data$design; outcome <- data$outcome
   via_linalg_out <- hiper_glm(design, outcome, model = 'linear')
   via_bfgs_out <- hiper_glm(design, outcome, model = 'linear', options = list(mle_solver = 'BFGS'))
+
+  ## compare analytical with BFGS
   expect_true(are_all_close(
     coef(via_linalg_out), coef(via_bfgs_out), abs_tol = 1e-2, rel_tol = 1e-2
+  ))
+
+  ## compare custom function with stat::optim
+  mle <- stats::optim(rep(0, dim(design)[[2]]), loglik.linear, design = design, outcome = outcome)
+  expect_true(are_all_close(
+    coef(via_linalg_out), mle$par, abs_tol = 1e-2, rel_tol = 1e-2
   ))
 })
