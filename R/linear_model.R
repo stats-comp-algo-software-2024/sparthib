@@ -1,6 +1,6 @@
 loglik.linear <- function(design, outcome, betas){
-  sigma_inv <- t(design) %*% design
-  loglik <- 0.5*t(outcome - design %*% betas) %*% (outcome - design %*% betas)
+  mat <- outcome - design %*% betas
+  loglik <- 0.5*t(mat) %*% (mat)
   return(loglik)
 }
 
@@ -19,10 +19,8 @@ approxgrad.linear <- function(func, x, dx = .Machine$double.eps^(1/3)) {
     x_minus[[i]] <- x_minus[[i]] - dx
 
     numerical_grad[[i]] <- (func(x_plus) - func(x_minus))/(2*dx)
-    print(numerical_grad[[i]])
   }
 
-  #numerical_grad <- (func(x + dx) - func(x - dx))/(2*dx)
   return(numerical_grad)
 }
 gaussian_logp <- function(x, Sigma_inv) {
