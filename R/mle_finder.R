@@ -1,14 +1,10 @@
 find.mle.pseudoinv <- function(design, outcome){
-  sigma_inv <- t(design) %*% design
-  #print(sigma_inv)
   betas <- solve(t(design) %*% design, t(design) %*% outcome)
   return(betas)
 }
 
 find.mle.bfgs <- function(design, outcome, tol=1e-6){
   betas <- rep(0, ncol(design))
-
-  #sigma_inv <- t(design) %*% design
 
   loglik <- loglik.linear(design, outcome, betas)
   grad <- grad.linear(design, outcome, betas)
