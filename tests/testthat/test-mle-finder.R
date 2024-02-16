@@ -11,7 +11,7 @@ test_that("linalg and optim least-sq coincide", {
   ))
 
   ## compare custom function with stat::optim
-  mle <- stats::optim(rep(0, dim(design)[[2]]), loglik.linear, design = design, outcome = outcome)
+  mle <- stats::optim(rep(0, dim(design)[[2]]), loglik_linear, design = design, outcome = outcome)
   expect_true(are_all_close(
     coef(via_linalg_out), mle$par, abs_tol = 1e-2, rel_tol = 1e-2
   ))

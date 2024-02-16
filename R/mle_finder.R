@@ -1,4 +1,4 @@
-find.mle.pseudoinv <- function(design, outcome){
+find_mle_pseudoinv <- function(design, outcome){
   betas <- solve(t(design) %*% design, t(design) %*% outcome)
   return(betas)
 }
@@ -15,7 +15,7 @@ min_residuals <- function(data = df, par) {
 }
 
 
-find.mle.bfgs <- function(design, outcome, tol=1e-6){
+find_mle_bfgs <- function(design, outcome, tol=1e-6){
 
 
   design <- cbind(rep(1, dim(design)[1]), design)
