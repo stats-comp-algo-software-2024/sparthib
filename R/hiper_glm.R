@@ -3,7 +3,7 @@
 hiper_glm <- function(design, outcome, model = "linear", options) {
   hglm <- list()
   class(hglm) <- "hglm"
-  supported_model <- c("linear", "logit")
+  supported_model <- c("linear")
   if (!(model %in% supported_model)) {
     stop(sprintf("The model %s is not supported.", model))
   }
