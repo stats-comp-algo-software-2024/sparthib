@@ -1,6 +1,6 @@
 #' @export
 
-hiper_glm <- function(design, outcome, model = "linear", options) {
+hiper_glm <- function(design, outcome, model = "linear", options ) {
   hglm <- list()
   class(hglm) <- "hglm"
   supported_model <- c("linear")

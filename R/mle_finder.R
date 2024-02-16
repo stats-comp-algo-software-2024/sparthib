@@ -6,14 +6,14 @@ find_mle_pseudoinv <- function(design, outcome){
 
 
 
+
 min_residuals <- function(data = df, par) {
 
-  design <- as.matrix(df[, names(df) != "outcome"])
+  design <- as.matrix(df[,1: ncol(df)-1])
   res <- design%*%par - as.matrix(df$outcome)
   res_sq <- t(res)%*%res
   return(res_sq)
 }
-
 
 find_mle_bfgs <- function(design, outcome, tol=1e-6){
 
@@ -22,6 +22,7 @@ find_mle_bfgs <- function(design, outcome, tol=1e-6){
   df <- as.data.frame(design)
   par <- as.matrix(rep_len(0.001, ncol(design)))
   df$outcome <- outcome
+
 
   result <- stats::optim(par = par, fn=min_residuals, data=df,
                method = "BFGS")
