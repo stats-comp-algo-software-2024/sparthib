@@ -7,7 +7,7 @@ hiper_glm <- function(design, outcome, model = "linear", options) {
   if (!(model %in% supported_model)) {
     stop(sprintf("The model %s is not supported.", model))
   }
-  if(missing(options)){
+  if(options$mle_solver == "LS"){
     betas <- find.mle.pseudoinv(design,outcome)
   }else if(options$mle_solver == "BFGS"){
     betas <- find.mle.bfgs(design,outcome)
