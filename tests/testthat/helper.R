@@ -26,7 +26,7 @@ simulate_data <- function(
     design <- cbind(rep(1, n_obs), design)
   }
   expected_mean <- as.vector(design %*% coef_true)
-  noise_magnitude <- sqrt(var(expected_mean) / signal_to_noise^2)
+  noise_magnitude <- sqrt(var(expected_mean) / signal_to_noise ^ 2)
   noise <- noise_magnitude * rnorm(n_obs)
   outcome <- expected_mean + noise
   return(list(design = design, outcome = outcome, coef_true = coef_true))
