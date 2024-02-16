@@ -58,7 +58,3 @@ approxgrad_linear <- function(func, x, dx = .Machine$double.eps^(1/3)) {
 
   return(numerical_grad)
 }
-gaussian_logp <- function(x, Sigma_inv) {
-  logp <- - .5 * t(x) %*% Sigma_inv %*% x
-  return(logp)
-}
