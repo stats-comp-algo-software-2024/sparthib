@@ -4,9 +4,6 @@ find_mle_pseudoinv <- function(design, outcome){
 }
 
 
-
-
-
 min_residuals <- function(data = df, par) {
 
   design <- as.matrix(df[,1: ncol(df)-1])
@@ -15,19 +12,12 @@ min_residuals <- function(data = df, par) {
   return(res_sq)
 }
 
-find_mle_bfgs <- function(design, outcome, tol=1e-6){
-
-
-  design <- cbind(rep(1, dim(design)[1]), design)
-  df <- as.data.frame(design)
-  par <- as.matrix(rep_len(0.001, ncol(design)))
-  df$outcome <- outcome
-
-
-  result <- stats::optim(par = par, fn=min_residuals, data=df,
-               method = "BFGS")
-  return(result$par)
-
-
+find_mle_bfgs <- function(design, outcome, func = loglik_logistic, grad = numerical_grad_logistic ){
+  mle = stats::optim(par = rep(0, ncol(design)),
+                     fn = func , gr = grad,
+                     design = design, outcome = outcome,
+                     control = list(fnscale = -1),
+                     method = "BFGS")
+  return(mle$par)
 }
 
